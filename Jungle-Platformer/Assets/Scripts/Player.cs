@@ -37,8 +37,19 @@ public class Player : MonoBehaviour {
 		}
 	}
 	
-	void OnCollisionEnter2D () {
+	void OnCollisionEnter2D (Collision2D col) {
 		grounded = true;
+        if (col.gameObject.tag == "enemy")
+        {
+            if (gameObject.transform.position.y > col.gameObject.transform.position.y)
+            {
+                Destroy(col.gameObject);
+            }
+            else
+            {
+                GameManager.Respawn();
+            }
+        }
 	}
 
 	void OnCollisionExit2D () {
